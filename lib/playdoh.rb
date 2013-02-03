@@ -8,7 +8,6 @@ class Playdoh
 
   def initialize(model=Object.new)
     @model = model
-    @mock = Mock.new
   end
 
   def method_missing(method, *args)
@@ -17,7 +16,7 @@ class Playdoh
   end
 
   def given()
-    @mock.stub(@model)
+    Mock.stub @model
   end
 
 end

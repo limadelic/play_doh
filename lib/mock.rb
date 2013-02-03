@@ -1,5 +1,5 @@
 require 'rr'
 
-class Mock
-  include RR::Adapters::RRMethods
+module Mock
+  extend RR::Adapters::RRMethods
 end

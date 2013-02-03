@@ -7,11 +7,11 @@ describe 'play-doh' do
 
     #old school rr
     x = Object.new
-    stub(x).anything
-    x.anything.should be nil
+    stub(x).a_method
+    x.a_method.should be nil
 
     #fresh & cool
-    Playdoh.new.anything.should be_a Playdoh
+    Playdoh.new.anything1.should be_a Playdoh
   end
 
   it 'can be modeled as a class' do
@@ -26,6 +26,20 @@ describe 'play-doh' do
 
     calc = Playdoh.new Calculator.new
     calc.add(2, 2).should == 4
+
+  end
+
+  it 'allow to setup stuff' do
+
+    #old skool rr
+    stuff = Object.new
+    stub(stuff).cool? { true }
+    stuff.should be_cool
+
+    #even cooler (not really pretty much the same)
+    stuff = Playdoh.new
+    given(stuff).cool? { true }
+    stuff.should be_cool
 
   end
 

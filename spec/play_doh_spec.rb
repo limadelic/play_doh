@@ -7,11 +7,11 @@ describe 'play-doh' do
 
     #old school rr
     x = Object.new
-    stub(x).a_method
-    x.a_method.should be nil
+    stub(x).anything
+    x.anything.should be nil
 
     #fresh & cool
-    Playdoh.new.anything1.should be_a Playdoh
+    Playdoh.new.anything.should be_a Playdoh
   end
 
   it 'can be modeled as a class' do

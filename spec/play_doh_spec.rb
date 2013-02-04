@@ -1,45 +1,41 @@
-require 'spec_helper'
 require_relative '../lib/playdoh'
+
+class Calculator
+
+  def add(x, y)
+    x + y
+  end
+
+end
+
 
 describe 'play-doh' do
 
-  it 'could be anything' do
+  subject { play_doh Calculator.new }
 
-    #old school rr
-    x = Object.new
-    stub(x).anything
-    x.anything.should be nil
+  it 'stubs all by default' do
 
-    #fresh & cool
-    Playdoh.new.anything.should be_a Playdoh
-  end
-
-  it 'can be modeled as a class' do
-
-    class Calculator
-
-      def add(x, y)
-        x + y
-      end
-
-    end
-
-    calc = Playdoh.new Calculator.new
-    calc.add(2, 2).should == 4
+    subject.add(2, 2).should be nil
 
   end
 
-  it 'allow to setup stuff' do
+  it 'executes the exercise method' do
 
-    #old skool rr
-    stuff = Object.new
-    stub(stuff).cool? { true }
-    stuff.should be_cool
+    subject.when.add(2, 2).should == 4
 
-    #even cooler (not really pretty much the same)
-    stuff = Playdoh.new
-    given(stuff).cool? { true }
-    stuff.should be_cool
+  end
+
+  it 'allows to setup' do
+
+    subject.given.add { 42 }
+    subject.when.add(2, 2).should == 42
+
+  end
+
+  it 'allows to verify' do
+
+    subject.add 2, 2
+    subject.then.add 2, 2
 
   end
 

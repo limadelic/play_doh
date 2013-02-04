@@ -1,22 +1,30 @@
 require 'mock'
 
-def given(playdoh)
-  playdoh.given()
+def play_doh(model=Object.new)
+  Playdoh.new model
 end
 
 class Playdoh
 
   def initialize(model=Object.new)
-    @model = model
+    Mock.spy @model = model
   end
 
   def method_missing(method, *args)
-    return @model.send method, *args if @model.respond_to? method
-    self
+    given().send method, *args
+    @model.send method, *args
   end
 
-  def given()
+  def given
     Mock.stub @model
+  end
+
+  def when
+    @model
+  end
+
+  def then
+    Mock.received @model
   end
 
 end

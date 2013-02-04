@@ -7,11 +7,11 @@ end
 class Playdoh
 
   def initialize(model=Object.new)
-    Mock.spy @model = model
+    @model = model
   end
 
   def method_missing(method, *args)
-    given().send method, *args
+    given.send(method, *args) { self }
     @model.send method, *args
   end
 

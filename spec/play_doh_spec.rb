@@ -8,14 +8,13 @@ class Calculator
 
 end
 
-
 describe 'play-doh' do
 
   subject { play_doh Calculator.new }
 
   it 'stubs all by default' do
 
-    subject.add(2, 2).should be nil
+    subject.add(2, 2).should be_a Playdoh
 
   end
 

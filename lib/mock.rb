@@ -1,14 +1,5 @@
 require 'rr'
 
-module Mock
-  extend RR::Adapters::RRMethods
-
-  def self.verify(method=nil)
-    RR::Adapters::Rspec::InvocationMatcher.new method
-  end
-
-end
-
 module RR
   module Adapters
     module RSpec2
@@ -25,6 +16,7 @@ module RR
       end
 
       def have_received(method = nil)
+        p 'here'
         RR::Adapters::Rspec::InvocationMatcher.new(method)
       end
     end
@@ -39,7 +31,17 @@ module RSpec
   end
 end
 
-RSpec.configure do |config|
-  config.mock_framework = RSpec::Core::MockFrameworkAdapter
-  config.backtrace_clean_patterns.push(RR::Errors::BACKTRACE_IDENTIFIER)
+module Mock
+  extend RR::Adapters::RRMethods
+
+  def self.received
+    p 'here too'
+    RR::Adapters::Rspec::InvocationMatcher.new
+  end
+
 end
+
+#RSpec.configure do |config|
+#  config.mock_framework = RSpec::Core::MockFrameworkAdapter
+#  config.backtrace_clean_patterns.push(RR::Errors::BACKTRACE_IDENTIFIER)
+#end

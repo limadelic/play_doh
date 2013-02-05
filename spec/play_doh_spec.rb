@@ -10,31 +10,32 @@ end
 
 describe 'play-doh' do
 
-  subject { play_doh Calculator.new }
+  let(:calc) { play_doh Calculator.new }
 
   it 'stubs all by default' do
 
-    subject.add(2, 2).should be_a Playdoh
+    calc.add(2, 2).should be_a Playdoh
 
   end
 
   it 'executes the exercise method' do
 
-    subject.when.add(2, 2).should == 4
+    calc.when.add(2, 2).should == 4
 
   end
 
   it 'allows to setup' do
 
-    subject.given.add { 42 }
-    subject.when.add(2, 2).should == 42
+    calc.given.add { 42 }
+    calc.when.add(2, 2).should == 42
 
   end
 
   it 'allows to verify' do
 
-    subject.add 2, 2
-    subject.then.add 2, 2
+    calc.add 2, 2
+    #calc.then add 2, 2
+    calc.then.add 2, 4
 
   end
 

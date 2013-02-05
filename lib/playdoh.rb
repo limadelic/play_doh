@@ -7,7 +7,7 @@ end
 class Playdoh
 
   def initialize(model=Object.new)
-    @model = model
+    Mock.spy @model = model
   end
 
   def method_missing(method, *args)
@@ -24,7 +24,8 @@ class Playdoh
   end
 
   def then
-    Mock.received @model
+    p 'here'
+    @model.should have_received
   end
 
 end

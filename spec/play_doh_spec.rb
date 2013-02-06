@@ -1,8 +1,10 @@
 require_relative '../lib/playdoh'
+require 'spec_helper'
 
 class Calculator
 
   def add(x, y)
+    p 'gonna add'
     x + y
   end
 
@@ -33,9 +35,12 @@ describe 'play-doh' do
 
   it 'allows to verify' do
 
-    calc.add 2, 2
-    #calc.then add 2, 2
-    calc.then.add 2, 4
+    sut = Calculator.new
+    #calc = play_doh sut
+    stub(sut).add 2, 2#.send :add, 2, 2
+    sut.send :add, 2, 2
+    #calc.add 2, 2
+    sut.should have_received.add 2, 2
 
   end
 

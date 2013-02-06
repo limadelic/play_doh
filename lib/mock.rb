@@ -42,6 +42,6 @@ module Mock
 end
 
 #RSpec.configure do |config|
-#  config.mock_framework = RSpec::Core::MockFrameworkAdapter
+#  config.mock_framework = :rr
 #  config.backtrace_clean_patterns.push(RR::Errors::BACKTRACE_IDENTIFIER)
 #end

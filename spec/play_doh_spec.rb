@@ -16,6 +16,7 @@ end
 describe 'play-doh' do
 
   let(:calc) { play_doh Calculator.new }
+  subject { calc }
 
   it 'stubs all by default' do
 
@@ -40,6 +41,18 @@ describe 'play-doh' do
 
     calc.verify.add 2, 2
     calc.when.add 2, 2
+
+  end
+
+  it 'should partial mock' do
+
+    sut = Calculator.new
+    stub(sut).add {'no args'}
+    stub(sut).add(2, 2) {'args'}
+
+    sut.add(2,2).should == 'args'
+
+    #calc.when.pi.should be nil
 
   end
 

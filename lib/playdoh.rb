@@ -20,14 +20,14 @@ class Playdoh
   end
 
   def method_missing(method, *args)
-    reset method
+    return reset method if @allowing
+    reset method if @executing
     @sut.__send__ method, *args
   end
 
   def reset(method)
-    return unless @on_when
     Mock.reset @sut, method
-    @on_when = false
+    @executing = @allowing = false
   end
 
   def given
@@ -35,7 +35,12 @@ class Playdoh
   end
 
   def when
-    @on_when = true
+    @executing = true
+    self
+  end
+
+  def allow
+    @allowing = true
     self
   end
 

@@ -50,4 +50,11 @@ describe 'play-doh' do
 
   end
 
+  it 'should partial execute' do
+
+    calc.allow.add
+    calc.when.pi.should == 3.14
+
+  end
+
 end

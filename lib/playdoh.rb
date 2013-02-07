@@ -22,7 +22,7 @@ class Playdoh
   def method_missing(method, *args)
     return reset method if @allowing
     reset method if @executing
-    @sut.__send__ method, *args
+    @sut.send method, *args
   end
 
   def reset(method)

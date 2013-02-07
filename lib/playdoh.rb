@@ -12,24 +12,21 @@ class Playdoh
   end
 
   def stub_all
-    methods = @sut.public_methods.map {|m| m.to_sym} -
-        [:methods, :==, :__send__, :__id__, :object_id, :class]
+    instance_methods.each { |method| Mock.stub @sut, method }
+  end
 
-    methods.each { |method| Mock.stub @sut, method }
+  def instance_methods
+    @sut.public_methods(false).map { |m| m.to_sym }
   end
 
   def method_missing(method, *args)
     reset method
-    #p *args
-    #@sut.add *args
-
-    @sut.eval send :add, *args
+    @sut.__send__ method, *args
   end
 
   def reset(method)
     return unless @on_when
-    p method
-    RR::Space.instance.reset_double @sut, method
+    Mock.reset @sut, method
     @on_when = false
   end
 

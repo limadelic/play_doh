@@ -16,7 +16,6 @@ module RR
       end
 
       def have_received(method = nil)
-        p 'here'
         RR::Adapters::Rspec::InvocationMatcher.new(method)
       end
     end
@@ -35,7 +34,6 @@ module Mock
   extend RR::Adapters::RRMethods
 
   def self.received
-    p 'here too'
     RR::Adapters::Rspec::InvocationMatcher.new
   end
 

@@ -1,35 +1,30 @@
 require 'mock'
 
-def play_doh(model=Object.new)
-  Playdoh.new model
+def play_doh(sut=Object.new)
+  Playdoh.new sut
 end
 
 class Playdoh
 
-  def initialize(model=Object.new)
-    @model = model
+  def initialize(sut=Object.new)
+    @sut = sut
   end
 
   def method_missing(method, *args)
-    given.send(method, *args) { self }
-    @model.send method, *args
+    given.send method, *args
+    @sut.send method, *args
   end
 
   def given
-    Mock.stub @model
+    Mock.stub @sut
   end
 
   def when
-    @model
+    @sut
   end
 
-  def then
-    @model
-  end
-
-  def should(condition)
-    p 'here really'
-    @model.should condition
+  def verify
+    Mock.mock @sut
   end
 
 end

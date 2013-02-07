@@ -4,8 +4,11 @@ require 'spec_helper'
 class Calculator
 
   def add(x, y)
-    p 'gonna add'
     x + y
+  end
+
+  def pi
+    add 3, 0.14
   end
 
 end
@@ -16,7 +19,7 @@ describe 'play-doh' do
 
   it 'stubs all by default' do
 
-    calc.add(2, 2).should be_a Playdoh
+    calc.add(2, 2).should be nil
 
   end
 
@@ -35,12 +38,8 @@ describe 'play-doh' do
 
   it 'allows to verify' do
 
-    sut = Calculator.new
-    #calc = play_doh sut
-    stub(sut).add 2, 2#.send :add, 2, 2
-    sut.send :add, 2, 2
-    #calc.add 2, 2
-    sut.should have_received.add 2, 2
+    calc.verify.add 2, 2
+    calc.when.add 2, 2
 
   end
 

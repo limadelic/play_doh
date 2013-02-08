@@ -8,14 +8,29 @@ class Playdoh
 
   def initialize(sut=Object.new)
     @sut = sut
+    @dependencies = {}
     stub_all
     default_operation
   end
 
   def stub_all
     instance_methods.each do |method|
-      Mock.stub(@sut, method).returns(self)
+      stub_property method or
+      stub method 
     end
+  end
+
+  def stub_property(name)
+    return unless is_property? name
+    stub name, @dependencies[name] = play_doh
+  end
+
+  def stub(method, value=nil)
+    Mock.stub(@sut, method).returns(value)
+  end
+
+  def is_property?(name)
+    @sut.method(name).parameters.empty?
   end
 
   def instance_methods

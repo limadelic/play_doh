@@ -8,7 +8,6 @@ class Playdoh
 
   def initialize(sut=Object.new)
     @sut = sut
-    @dependencies = {}
     stub_all
     default_operation
   end
@@ -22,7 +21,7 @@ class Playdoh
 
   def stub_property(name)
     return unless is_property? name
-    stub name, @dependencies[name] = play_doh
+    stub name, play_doh
   end
 
   def stub(method, value=nil)

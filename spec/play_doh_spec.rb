@@ -3,12 +3,22 @@ require 'spec_helper'
 
 class Calculator
 
+  attr_reader :screen
+
+  def initialize(screen=Object.new)
+    @screen = screen
+  end
+
   def add(x, y)
     x + y
   end
 
   def pi
     add 3, 0.14
+  end
+
+  def turn_on
+    screen.on
   end
 
 end
@@ -50,10 +60,10 @@ describe 'play-doh' do
 
   end
 
-  it 'should partial execute' do
+  it 'should behave as auto-mock container' do
 
-    calc.allow.add
-    calc.when.pi.should == 3.14
+    #calc.screen.verify.on
+    #calc.when.turn_on
 
   end
 

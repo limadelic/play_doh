@@ -9,6 +9,7 @@ class Playdoh
   def initialize(sut=Object.new)
     @sut = sut
     stub_all
+    default_operation
   end
 
   def stub_all
@@ -19,15 +20,23 @@ class Playdoh
     @sut.public_methods(false).map { |m| m.to_sym }
   end
 
+  def operation
+    @operation = -> method, *args { yield method, *args }
+    self
+  end
+
+  def default_operation
+    operation { |method, *args| @sut.send method, *args }
+  end
+
   def method_missing(method, *args)
-    return reset method if @allowing
-    reset method if @executing
-    @sut.send method, *args
+    @operation.call method, *args
+  ensure
+    default_operation
   end
 
   def reset(method)
     Mock.reset @sut, method
-    @executing = @allowing = false
   end
 
   def given
@@ -35,13 +44,10 @@ class Playdoh
   end
 
   def when
-    @executing = true
-    self
-  end
-
-  def allow
-    @allowing = true
-    self
+    operation do |method, *args|
+      reset method
+      @sut.send method, *args
+    end
   end
 
   def verify

@@ -30,7 +30,7 @@ describe 'play-doh' do
 
   it 'should stub all by default' do
 
-    calc.add(2, 2).should be nil
+    calc.add(2, 2).should be calc
 
   end
 
@@ -56,14 +56,18 @@ describe 'play-doh' do
 
   it 'should partial mock' do
 
-    calc.when.pi.should be nil
+    calc.when.pi.should be calc
 
   end
 
   it 'should behave as auto-mock container' do
 
-    #calc.screen.verify.on
-    #calc.when.turn_on
+    #sut = Calculator.new
+    #mock(sut).on
+    #sut.on
+
+    calc.verify.on
+    calc.when.turn_on
 
   end
 

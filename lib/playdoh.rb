@@ -13,7 +13,9 @@ class Playdoh
   end
 
   def stub_all
-    instance_methods.each { |method| Mock.stub @sut, method }
+    instance_methods.each do |method|
+      Mock.stub(@sut, method).returns(self)
+    end
   end
 
   def instance_methods

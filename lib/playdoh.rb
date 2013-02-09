@@ -1,21 +1,21 @@
 require 'mock'
 
-def play_doh(sut=Object.new)
+def play_doh(sut=nil)
   Playdoh.new sut
 end
 
 class Playdoh
 
-  def initialize(sut=Object.new)
-    @sut = sut
-    stub_all
+  def initialize(sut=nil)
+    @sut = sut || Object.new
+    stub_methods
     default_operation
   end
 
-  def stub_all
+  def stub_methods
     instance_methods.each do |method|
       stub_property method or
-      stub method 
+      stub method
     end
   end
 
@@ -43,7 +43,6 @@ class Playdoh
 
   def default_operation
     operation do |method, *args|
-      stub method unless @sut.respond_to? method
       @sut.send method, *args
     end
   end

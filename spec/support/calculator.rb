@@ -2,8 +2,8 @@ class Calculator
 
   attr_reader :screen
 
-  def initialize(screen=Object.new)
-    @screen = screen
+  def initialize
+    @screen = Screen.new
   end
 
   def add(x, y)
@@ -15,7 +15,15 @@ class Calculator
   end
 
   def turn_on
-    screen.on
+    @screen.on
+  end
+
+end
+
+class Screen
+
+  def on
+    @on = true
   end
 
 end

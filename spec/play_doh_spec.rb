@@ -45,4 +45,10 @@ describe 'play-doh' do
 
   end
 
+  it 'should stub dependencies' do
+
+    calc.when.turn_on.should be nil
+
+  end
+
 end

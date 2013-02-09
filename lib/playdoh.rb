@@ -42,7 +42,10 @@ class Playdoh
   end
 
   def default_operation
-    operation { |method, *args| @sut.send method, *args }
+    operation do |method, *args|
+      Mock.stub @sut, method unless @sut.respond_to? method
+      @sut.send method, *args
+    end
   end
 
   def method_missing(method, *args)

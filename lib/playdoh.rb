@@ -1,39 +1,19 @@
-require 'mock'
-
 def play_doh(sut=nil)
   Playdoh.new sut
 end
 
+require_relative 'mock'
+require_relative 'stub'
+
 class Playdoh
+
+  include Stub
 
   def initialize(sut=nil)
     @sut = sut || Object.new
     stub_methods
+    stub_dependencies
     default_operation
-  end
-
-  def stub_methods
-    instance_methods.each do |method|
-      stub_property method or
-      stub method
-    end
-  end
-
-  def stub_property(name)
-    return unless is_property? name
-    stub name, play_doh
-  end
-
-  def stub(method, value=nil)
-    Mock.stub(@sut, method).returns(value)
-  end
-
-  def is_property?(name)
-    @sut.method(name).parameters.empty?
-  end
-
-  def instance_methods
-    @sut.public_methods(false).map { |m| m.to_sym }
   end
 
   def operation

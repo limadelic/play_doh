@@ -23,6 +23,7 @@ class Playdoh
 
   def default_operation
     operation do |method, *args|
+      stub method unless @sut.respond_to? method
       @sut.send method, *args
     end
   end

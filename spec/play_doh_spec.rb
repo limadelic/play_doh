@@ -1,14 +1,18 @@
-require_relative '../lib/playdoh'
 require 'spec_helper'
 
-describe 'play-doh' do
+describe 'on an object' do
 
   let(:calc) { play_doh Calculator.new }
-  subject { calc }
 
   it 'should stub all by default' do
 
     calc.add(2, 2).should be nil
+
+  end
+
+  it 'should stub undefined methods' do
+
+    calc.div(1, 0).should be nil
 
   end
 
@@ -35,32 +39,6 @@ describe 'play-doh' do
   it 'should partial mock' do
 
     calc.when.pi.should be nil
-
-  end
-
-  it 'should behave as auto-mock container' do
-
-    calc.screen.verify.on
-    calc.when.turn_on
-
-  end
-
-  it 'should auto-stub dependencies' do
-
-    calc.when.turn_on.should be nil
-
-  end
-
-  it 'should allow to stub dependencies' do
-
-    calc.screen.given.on { true }
-    calc.when.turn_on.should be true
-
-  end
-
-  it 'should not mess up with data types' do
-
-    calc.serial.should == 'XXX'
 
   end
 

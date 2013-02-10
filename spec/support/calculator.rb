@@ -1,7 +1,10 @@
 class Calculator
 
+  attr_reader :serial
+
   def initialize
     @screen = Screen.new
+    @serial = 'XXX'
   end
 
   def add(x, y)

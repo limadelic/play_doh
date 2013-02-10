@@ -18,9 +18,13 @@ module Stub
   end
 
   def stub_dependency(name)
-    value = play_doh @sut.instance_variable_get name
-    @sut.instance_variable_set name, value
-    stub method_for_property(name), value
+    current_value = @sut.instance_variable_get name
+    return unless is_dependency? current_value
+
+    stubbed_value = play_doh current_value
+
+    @sut.instance_variable_set name, stubbed_value
+    stub method_for_property(name), stubbed_value
   end
 
 end

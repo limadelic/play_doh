@@ -58,4 +58,10 @@ describe 'play-doh' do
 
   end
 
+  it 'should not mess up with data types' do
+
+    calc.serial.should == 'XXX'
+
+  end
+
 end

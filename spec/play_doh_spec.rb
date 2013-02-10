@@ -45,9 +45,16 @@ describe 'play-doh' do
 
   end
 
-  it 'should stub dependencies' do
+  it 'should auto-stub dependencies' do
 
     calc.when.turn_on.should be nil
+
+  end
+
+  it 'should allow to stub dependencies' do
+
+    calc.screen.given.on { true }
+    calc.when.turn_on.should be true
 
   end
 

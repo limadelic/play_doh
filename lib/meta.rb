@@ -15,6 +15,7 @@ module Meta
   end
 
   def is_dependency?(object)
+    object != @sut and
     not DATA_TYPES.include? object.class
   end
 

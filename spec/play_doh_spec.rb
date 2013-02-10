@@ -40,16 +40,8 @@ describe 'play-doh' do
 
   it 'should behave as auto-mock container' do
 
-    sut = Calculator.new
-
-    p sut.instance_variables
-    p sut.public_methods false
-    p screen = sut.instance_variable_get(:@screen)
-
-
-
-    #calc.screen.verify.on
-    #calc.when.turn_on
+    calc.screen.verify.on
+    calc.when.turn_on
 
   end
 

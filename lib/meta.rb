@@ -7,11 +7,16 @@ module Meta
   end
 
   def is_property?(name)
-    @sut.instance_variables.include? property name
+    @sut.instance_variables.
+      include? property_for_method name
   end
 
-  def property(name)
-    name.to_s.gsub(':', ':@').to_sym
+  def property_for_method(name)
+    "@#{name.to_s}".to_sym
+  end
+
+  def method_for_property(name)
+    name.to_s[1..-1].to_sym
   end
 
 end

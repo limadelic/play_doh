@@ -18,8 +18,9 @@ module Stub
   end
 
   def stub_dependency(name)
-    @sut.instance_variable_set name,
-      play_doh(@sut.instance_variable_get name)
+    value = play_doh @sut.instance_variable_get name
+    @sut.instance_variable_set name, value
+    stub method_for_property(name), value
   end
 
 end

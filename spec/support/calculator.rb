@@ -1,7 +1,5 @@
 class Calculator
 
-  attr_reader :screen
-
   def initialize
     @screen = Screen.new
   end

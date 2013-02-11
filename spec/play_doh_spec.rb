@@ -10,12 +10,6 @@ describe 'on an object' do
 
   end
 
-  it 'should stub undefined methods' do
-
-    calc.div(1, 0).should be nil
-
-  end
-
   it 'should execute the desired method' do
 
     calc.when.add(2, 2).should == 4

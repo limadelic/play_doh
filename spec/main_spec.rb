@@ -19,7 +19,6 @@ describe 'on the main object' do
 
   after :each do
     load_file 'main'
-    reset
   end
 
   it 'should stub global functions' do

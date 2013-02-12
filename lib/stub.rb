@@ -18,6 +18,10 @@ module Stub
     def @sut.method_missing(method, *args)
       nil
     end
+
+    def @sut.respond_to?(method)
+      true
+    end
   end
 
   def stub_dependencies

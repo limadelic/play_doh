@@ -1,4 +1,5 @@
 def play_doh(sut=nil)
+  return sut if sut.is_a? Playdoh
   Playdoh.new sut
 end
 

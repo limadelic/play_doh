@@ -11,6 +11,13 @@ module Stub
 
   def stub_methods
     instance_methods.each { |m| stub m }
+    stub_method_missing
+  end
+
+  def stub_method_missing
+    def @sut.method_missing(method, *args)
+      nil
+    end
   end
 
   def stub_dependencies

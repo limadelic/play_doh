@@ -42,7 +42,7 @@ describe 'on the main object' do
 
   it 'should execute global' do
 
-    subject.given.global.yields
+    subject.given.global_with_block.yields
     subject.verify.ran_global
 
   end

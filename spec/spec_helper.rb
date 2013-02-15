@@ -12,4 +12,4 @@ end
 
 Dir["#{root_dir}/spec/support/**/*.rb"].each {|f| require f }
 
-require_relative '../lib/playdoh'
+require_relative '../lib/play_doh'

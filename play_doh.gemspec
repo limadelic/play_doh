@@ -6,7 +6,8 @@ Gem::Specification.new do |the|
   the.description   = 'partial mocks on rr'
   the.authors       = ['limadelic']
   the.email         = 'limadelic@gmail.com'
-  the.files         = `git ls-files -- lib/*`.split("\n").sort
+  the.files = ['lib\play_doh.rb']
+  #the.files         = `git ls-files -- lib/*`.split("\n").sort
   the.require_paths = ['lib']
   the.homepage      = 'https://github.com/limadelic/play_doh'
 end

@@ -4,29 +4,15 @@ def main
   @main ||= TOPLEVEL_BINDING.eval 'self'
 end
 
-def root_dir
-  File.join(File.dirname(__FILE__), '..')
-end
-
-def load_file(name)
-  load "#{root_dir}/spec/fixtures/#{name}.rb"
-end
-
+def main.global; end
+def main.global_with_block; end
+def main.ran_global; end
 
 describe 'on the main object' do
 
   subject { play_doh main }
 
-  after :each do
-    load_file 'main'
-  end
-
-  it 'should stub global functions' do
-
-    play_doh main
-    load_file 'main'
-
-  end
+  after { load_file 'main' }
 
   it 'should mock global functions' do
 
@@ -36,7 +22,8 @@ describe 'on the main object' do
 
   it 'should allow to stub' do
 
-    subject.given.global
+    subject.given.global { 42 }
+    subject.global.should == 42
 
   end
 

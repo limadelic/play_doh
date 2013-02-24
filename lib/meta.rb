@@ -25,7 +25,7 @@ module Meta
   end
 
   def property_for_method(name)
-    "@#{name.to_s}".to_sym
+    "@#{name}".to_sym
   end
 
   def method_for_property(name)

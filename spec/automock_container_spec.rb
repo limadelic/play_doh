@@ -12,8 +12,8 @@ describe 'as auto-mock container' do
 
   it 'should spy on dependencies' do
 
-    calc.screen.verify.on
     calc.when.turn_on
+    calc.screen.verify.on
 
   end
 

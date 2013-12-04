@@ -49,6 +49,10 @@ class Playdoh
     end
   end
 
+  def should
+    expect(@sut).to have_received
+  end
+
   def verify
     Mock.mock @sut
   end

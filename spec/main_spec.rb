@@ -1,37 +1,27 @@
 require 'spec_helper'
+require_relative '../lib/mock'
 
-def main
-  @main ||= TOPLEVEL_BINDING.eval 'self'
+describe 'Main Object' do
+
+  subject { Scope.new('run 42').sut }
+
+  it { should run 42 }
+
 end
 
-def main.global; end
-def main.global_with_block; end
-def main.ran_global; end
+class Scope
 
-describe 'on the main object' do
+  attr_reader :sut
 
-  subject { play_doh main }
-
-  after { load_file 'main' }
-
-  it 'should mock global functions' do
-
-    subject.verify.global
-
+  def initialize file
+    @sut = Object.new
+    eval file
   end
 
-  it 'should allow to stub' do
-
-    subject.given.global { 42 }
-    subject.global.should == 42
-
-  end
-
-  it 'should execute global' do
-
-    subject.given.global_with_block.yields
-    subject.verify.ran_global
-
+  def method_missing method, *args
+    Mock.stub(sut, "#{method}?") { true }
+    Mock.stub sut, method
+    sut.send method, *args
   end
 
 end
